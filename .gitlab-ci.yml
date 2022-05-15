@@ -3,15 +3,15 @@ variables:
 
 image: maven:latest
 
-default:
-  interruptible: false
-  tags:
-    - python
 stages:
   - build
   - test
   - package
   - deploy
+
+default:
+  tags:
+    - python
 
 cache:
   paths:
@@ -20,8 +20,6 @@ cache:
 
 build-job:
   stage: build
-  tags:
-    - docker
   script:
     - echo "Maven Compile started"
     - "mvn compile"
@@ -35,15 +33,11 @@ test-job:
 
 package_job:
   stage:  package
-  tags:
-    - docker
   script:
     - echo "Maven package started"
     - "mvn install"
 
 deploy_job:
   stage:  deploy
-  tags:
-    - docker
   script:
     - echo "Maven deploy started"
