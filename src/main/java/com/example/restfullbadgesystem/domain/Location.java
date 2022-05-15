@@ -24,4 +24,7 @@ public class Location {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<TimeSlot> timeSlots = new ArrayList<>();
+
+    @Transient
+    private int occupied;
 }

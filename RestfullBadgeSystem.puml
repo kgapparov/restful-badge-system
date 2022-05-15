@@ -31,6 +31,7 @@ class Location {
     +description
     +capacity
     +address
+    +occupied
 }
 
 class LimitedMembership {
@@ -58,14 +59,14 @@ enum LocationType {
 }
 
 Member "1" o--> "*" Badge: has
-Member " * " o--> " 1 " Membership : has
+Member " 1 " o--> " * " Membership : has
 Membership " * " o-->" 1 " Plan: belongs to
-Membership "1" o--> "*" Location: access to
 LimitedMembership --|> Membership
-Plan "1 " o--> "*" Role
+Plan "1 " o--> "*" Role : Allowed roles
 Location "1" o-->"*" TimeSlot
 Location "*" o--> "1" LocationType
 TimeSlot "*" *--> "1" DayOfWeek
+Plan "*" o--> "1" LocationType : Allowed Locations
 
 Role "*" <-- "*" Member
 Transaction --> Member: logs
