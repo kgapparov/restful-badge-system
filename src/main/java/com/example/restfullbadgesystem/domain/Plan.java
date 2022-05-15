@@ -21,4 +21,8 @@ public class Plan {
     @Enumerated
     @ElementCollection
     private Collection<Role> allowedRoles;
+
+    @Enumerated
+    @ElementCollection
+    private Collection<LocationType> allowedLocationTypes;
 }
