@@ -1,0 +1,71 @@
+@startuml
+abstract class Badge {
+    +issueDate
+    +expireDate
+}
+
+
+class Member {
+    +firstName
+    +lastName
+    +email
+}
+
+
+class Membership{
+    +startDate
+    +endDate
+}
+
+class Plan {
+    +name
+    +description
+}
+
+class Role {
+    +name
+}
+
+class Location {
+    +name
+    +description
+    +capacity
+    +address
+}
+
+class LimitedMembership {
+ +limit
+}
+
+class TimeSlot {
+    +startDate
+    +endDate
+}
+
+enum DayOfWeek {
+    +dayOfWeek
+}
+
+class Transaction {
+    dateTime
+    log
+}
+enum LocationType {
+    DINING_HALL, MEDITATION_HALL ...
+}
+
+Member "1" o--> "*" Badge: has
+Member " * " o--> " 1 " Membership : has
+Membership " * " o-->" 1 " Plan: belongs to
+Membership "1" o--> "*" Location: access to
+LimitedMembership --|> Membership
+Plan "1 " o--> "*" Role
+Location "1" o-->"*" TimeSlot
+Location "*" o--> "1" LocationType
+TimeSlot "*" *--> "1" DayOfWeek
+
+Role "*" <-- "*" Member
+Transaction --> Member: logs
+Transaction --> Location: logs
+
+@enduml
