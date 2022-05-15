@@ -50,6 +50,9 @@ verify:jdk8:
 # For deploying packages to GitLab's Maven Repository: See https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for more details.
 # Please note: The GitLab Maven Repository is currently only available in GitLab Premium / Ultimate.
 # For `master` branch run `mvn deploy` automatically.
+stages:
+  - build
+  - deploy
 deploy:jdk8:
   stage: deploy
   script:
@@ -60,3 +63,12 @@ deploy:jdk8:
   only:
     variables:
       - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+maven-build:
+ image: maven:3-jdk-8
+ stage: build
+ tags: my project ci-cd
+ script: "mvn package -B"
+ artifacts:
+ paths:
+  - target/*.jar
