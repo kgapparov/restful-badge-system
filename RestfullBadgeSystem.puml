@@ -1,5 +1,5 @@
 @startuml
-abstract class Badge {
+class Badge {
     +issueDate
     +expireDate
 }
@@ -22,7 +22,7 @@ class Plan {
     +description
 }
 
-class Role {
+enum Role {
     +name
 }
 
@@ -50,6 +50,9 @@ class Transaction {
     dateTime
     log
 }
+enum TrasactionType {
+    CHECKIN, CHECKOUT
+}
 enum LocationType {
     DINING_HALL, MEDITATION_HALL ...
 }
@@ -67,5 +70,6 @@ TimeSlot "*" *--> "1" DayOfWeek
 Role "*" <-- "*" Member
 Transaction --> Member: logs
 Transaction --> Location: logs
+Transaction --> TrasactionType
 
 @enduml
