@@ -36,7 +36,7 @@ package_job:
     - docker
   script:
     - echo "Maven package started"
-    - "mvn package"
+    - "mvn install"
 
 deploy_job:
   stage:  deploy
