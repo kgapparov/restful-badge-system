@@ -5,7 +5,7 @@ image: maven:latest
 
 stages:
   - build
-  # - test
+  - test
   - package
   - deploy
 
@@ -27,7 +27,12 @@ build-job:
     paths:
       - target/*
       
-
+test-job:
+  stage: test
+  script:
+    - echo "Maven test started"
+    - "mvn clean test"
+    
 package_job:
   stage:  package
   script:
