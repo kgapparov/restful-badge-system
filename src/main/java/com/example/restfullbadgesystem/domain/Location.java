@@ -19,12 +19,24 @@ public class Location {
     private int capacity;
     private String address;
 
-    @Enumerated(EnumType.STRING)
-    private LocationType type;
+    @ElementCollection
+    private Collection<LocationType> types;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<TimeSlot> timeSlots = new ArrayList<>();
 
     @Transient
-    private int occupied;
+    private int occupied = 0;
+
+	public Location(String name, String description, int capacity, String address, Collection<LocationType> types,
+			Collection<TimeSlot> timeSlots) {
+		this.name = name;
+		this.description = description;
+		this.capacity = capacity;
+		this.address = address;
+		this.types = types;
+		this.timeSlots = timeSlots;
+	}
+    
+    
 }
