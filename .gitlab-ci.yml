@@ -40,9 +40,16 @@ package_job:
     - "mvn clean install"
   artifacts:
     paths:
-      - /Users/khassangali/gitlab-runner
+      - target/*.jar
 
 deploy_job:
   stage:  deploy
+  image:  openjdk:8-jre-alpine
+  tags:
+    - home
   script:
     - echo "Maven deploy started"
+    - "EXPOSE 8082"
+    - "WORKIR /app"
+    - COPY $CI_PROJECT_DIR/target/*.jar badgesystem.jar
+    - CMD ["/usr/bin/java", "-jar", "/app/badgesystem.jar"]
