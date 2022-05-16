@@ -23,9 +23,6 @@ build-job:
   script:
     - echo "Maven Compile started"
     - "mvn clean compile"
-  artifacts:
-    paths:
-      - target/*
       
 test-job:
   stage: test
@@ -38,6 +35,9 @@ package_job:
   script:
     - echo "Maven package started"
     - "mvn clean install"
+  artifacts:
+    paths:
+      - target/*.jar
 
 deploy_job:
   stage:  deploy
