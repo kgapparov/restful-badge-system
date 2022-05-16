@@ -35,7 +35,7 @@ package_job:
   stage:  package
   script:
     - echo "Maven package started"
-    - "mvn install"
+    - "mvn clean install"
 
 deploy_job:
   stage:  deploy
