@@ -11,7 +11,7 @@ stages:
 
 default:
   tags:
-    - home-docker
+    - home
 
 cache:
   paths:
