@@ -40,6 +40,6 @@ package_job:
     - "mvn clean install"
   artifacts:
     paths:
-      - target/badge-system.jar
+      - target/*.jar
 
 
