@@ -40,12 +40,12 @@ package_job:
     - "mvn clean install"
   artifacts:
     paths:
-      - target/*.jar
+      - target/badge-system.jar
 
 deploy_job:
   stage:  deploy
   tags:
-    - home
+    - deploy
   script:
     - echo "Maven deploy started"
-    - cp $CI_PROJECT_DIR/target/*jar /tmp/
+    - cp $CI_PROJECT_DIR/target/badge-system.jar /tmp/
