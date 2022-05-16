@@ -40,7 +40,7 @@ package_job:
     - "mvn clean install"
   artifacts:
     paths:
-      - target/*.jar
+      - /Users/khassangali/gitlab-runner
 
 deploy_job:
   stage:  deploy
