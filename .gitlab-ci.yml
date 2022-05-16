@@ -42,10 +42,4 @@ package_job:
     paths:
       - target/badge-system.jar
 
-deploy_job:
-  stage:  deploy
-  tags:
-    - deploy
-  script:
-    - echo "Maven deploy started"
-    - cp $CI_PROJECT_DIR/target/badge-system.jar /tmp/
+
