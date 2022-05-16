@@ -5,7 +5,7 @@ image: maven:latest
 
 stages:
   - build
-  - test
+  # - test
   - package
   - deploy
 
@@ -24,11 +24,11 @@ build-job:
     - echo "Maven Compile started"
     - "mvn compile"
 
-test-job:
-  stage: test
-  script:
-    - echo "Maven test started"
-    - "mvn test"
+# test-job:
+#   stage: test
+#   script:
+#     - echo "Maven test started"
+#     - "mvn test"
 
 
 package_job:
