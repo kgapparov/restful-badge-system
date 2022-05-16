@@ -40,37 +40,12 @@ public class LocationController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void removeLocation(Location newLocation, @PathVariable int oldLocationId) {
-		service.updateLocation(newLocation, oldLocationId);
+	public void removeLocation(@PathVariable int locationId) {
+		service.removeLocation(locationId);
 	}
 	
 	@PutMapping("/{id}")
-	public void updateLocation(Location newLocation, @PathVariable int oldLocationId) {
-		service.updateLocation(newLocation, oldLocationId);
-	}
-	
-	@PatchMapping("/{id}")
-	public void increaseOccupied(@PathVariable int locationId) {
-		service.increaseOccupied(locationId);
-	}
-	
-	@PatchMapping("/{id}")
-	public void decreaseOccupied(@PathVariable int locationId) {
-		service.decreaseOccupied(locationId);
-	}
-	
-	@PatchMapping("/{id}")
-	public void resetOccupied(@PathVariable int locationId) {
-		service.resetOccupied(locationId);
-	}
-	
-	@PatchMapping("/{id}")
-	public void updateCapacity(@PathVariable int locationId, int capacity) {
-		service.updateCapacity(locationId, capacity);
-	}
-	
-	@PatchMapping("/{id}")
-	public void updateTimeSlots(@PathVariable int locationId, Collection<TimeSlot> timeSlots) {
-		service.updateTimeSlots(locationId, timeSlots);
+	public void updateLocation(Location newLocation) {
+		service.updateLocation(newLocation);
 	}
 }

@@ -12,26 +12,16 @@ usecase "createLocation" as uc4
 usecase "getLocation" as uc5
 usecase "updateLocation" as uc6
 usecase "deleteLocation" as uc7
-usecase "updateTimeSlots" as uc8
-usecase "updateCapacity" as uc9
-usecase "increaseOccupied" as uc10
-usecase "decreaseOccupied" as uc11
-usecase "resetOccupied" as uc12
 
 
 member -->uc3
 member -->uc5
-member --> uc10
-member --> uc11
 
 admin --> uc3
 admin --> uc4
 admin --> uc5
 admin --> uc6
 admin --> uc7
-admin --> uc8
-admin --> uc9
-admin --> uc12
 
 }
 
