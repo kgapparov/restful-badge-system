@@ -18,7 +18,6 @@ public class BadgeServiceImple implements BadgeService {
 
     //for creating new Badge
     public Badge createBadge(Badge badge) {
-
         return badgeDAO.save(badge);
     }
 
@@ -36,8 +35,8 @@ public class BadgeServiceImple implements BadgeService {
         return badgeFound;
     }
 
-    // updating single Badge expirydate  by using id
-    public Badge updateBadge(Long id) {
+    // updating expired badge
+    public Badge patchBadge(Long id) {
 
         Badge foundBadge = badgeDAO.findById(id).get();
 
@@ -49,8 +48,7 @@ public class BadgeServiceImple implements BadgeService {
             foundBadgeExpriyDate.plusMonths(12);
         } else if (role.contains("FACULTY")) {
             foundBadgeExpriyDate.plusMonths(6);
-        } else {
-            foundBadgeExpriyDate.plusMonths(1);
+        } else { foundBadgeExpriyDate.plusMonths(1);
         }
 
         foundBadge.setExpireDate(foundBadgeExpriyDate);
@@ -67,8 +65,8 @@ public class BadgeServiceImple implements BadgeService {
         badgeDAO.deleteById(id);
     }
 
-    // replace  lost Badge
-    public Badge replaceBadge(Long id) {
+    // Update lost Badge
+    public Badge updateLostBadge(Long id) {
 
         // get the lostbadge by id, Make it inactive and Save it
         Badge lostBadge = badgeDAO.findById(id).get();

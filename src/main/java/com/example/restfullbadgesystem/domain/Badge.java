@@ -2,7 +2,6 @@ package com.example.restfullbadgesystem.domain;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 @Entity
@@ -16,18 +15,23 @@ public class Badge {
 
     private LocalDate expireDate;
 
-    private Boolean isActive = true;
+    private Boolean isActive;
 
-//    public Badge() {
-//    }
-//    public Badge(Member member, LocalDate expriyDate) {
-//        this.isActive = true;
-//        this.member = member;
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-//        LocalDate now = LocalDate.now(); // Returns instance with current date and time set
-//        this.issueDate = LocalDate.parse(formatter.format(now));
-//        this.expireDate = expriyDate;
-//    }
+    public Badge() {
+    }
+
+    public Badge(Member member) {
+        this.isActive = true;
+        this.member = member;
+        this.issueDate = LocalDate.now();
+        if (member.getRoles().contains("STAFF")) {
+            this.expireDate = issueDate.plusMonths(12);
+        } else if (member.getRoles().contains("FACULTY")) {
+            this.expireDate = issueDate.plusMonths(6);
+        }   else { this.expireDate = issueDate.plusMonths(8);
+        }
+    }
+
     @ManyToOne
     private Member member;
 
