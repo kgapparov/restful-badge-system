@@ -59,10 +59,10 @@ public class LocationController {
 		service.decreaseOccupied(locationId);
 	}
 	
-	@PatchMapping("/{id}")
-	public void resetOccupied(@PathVariable int locationId) {
-		service.resetOccupied(locationId);
-	}
+//	@PatchMapping("/{id}")
+//	public void resetOccupied(@PathVariable int locationId) {
+//		service.resetOccupied(locationId);
+//	}
 	
 	@PatchMapping("/{id}")
 	public void updateCapacity(@PathVariable int locationId, int capacity) {
