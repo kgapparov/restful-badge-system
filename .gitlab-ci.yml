@@ -26,18 +26,11 @@ build-job:
   artifacts:
     paths:
       - target/*
-
-# test-job:
-#   stage: test
-#   script:
-#     - echo "Maven test started"
-#     - "mvn test"
-
+      
 
 package_job:
   stage:  package
   script:
-    - ping -c 4 192.168.200.153
     - echo "Maven package started"
     - "mvn clean install"
 
