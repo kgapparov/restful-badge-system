@@ -1,7 +1,6 @@
 package com.example.restfullbadgesystem.services;
 
 import com.example.restfullbadgesystem.domain.Badge;
-
 import java.util.List;
 
 public interface BadgeService {
@@ -15,12 +14,13 @@ public interface BadgeService {
     //for getting single badge
     public Badge getBadge(Long id);
 
-    // updating single Badge expirydate  by using id
-    public Badge updateBadge(Long id);
+    // updating expired badge
+    public Badge patchBadge(Long id);
 
     // delete Badge
     public void deleteBadge(Long id);
 
-    public Badge replaceBadge(Long id);
+    // Update lost Badge
+    public Badge updateLostBadge(Long id);
 
 }
