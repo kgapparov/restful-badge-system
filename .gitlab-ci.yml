@@ -23,6 +23,9 @@ build-job:
   script:
     - echo "Maven Compile started"
     - "mvn compile"
+  artifacts:
+    paths:
+      - target/*.jar
 
 # test-job:
 #   stage: test
