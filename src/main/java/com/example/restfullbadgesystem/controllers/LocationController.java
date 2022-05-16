@@ -54,23 +54,23 @@ public class LocationController {
 		service.increaseOccupied(locationId);
 	}
 	
-	@PatchMapping("/{id}")
-	public void decreaseOccupied(@PathVariable int locationId) {
-		service.decreaseOccupied(locationId);
-	}
+//	@PatchMapping("/{id}")
+//	public void decreaseOccupied(@PathVariable int locationId) {
+//		service.decreaseOccupied(locationId);
+//	}
 	
 //	@PatchMapping("/{id}")
 //	public void resetOccupied(@PathVariable int locationId) {
 //		service.resetOccupied(locationId);
 //	}
 	
-	@PatchMapping("/{id}")
-	public void updateCapacity(@PathVariable int locationId, int capacity) {
-		service.updateCapacity(locationId, capacity);
-	}
-	
-	@PatchMapping("/{id}")
-	public void updateTimeSlots(@PathVariable int locationId, Collection<TimeSlot> timeSlots) {
-		service.updateTimeSlots(locationId, timeSlots);
-	}
+//	@PatchMapping("/{id}")
+//	public void updateCapacity(@PathVariable int locationId, int capacity) {
+//		service.updateCapacity(locationId, capacity);
+//	}
+//
+//	@PatchMapping("/{id}")
+//	public void updateTimeSlots(@PathVariable int locationId, Collection<TimeSlot> timeSlots) {
+//		service.updateTimeSlots(locationId, timeSlots);
+//	}
 }
