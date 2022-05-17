@@ -40,39 +40,4 @@ public class Location {
 		this.types = types;
 		this.timeSlots = timeSlots;
 	}
-    
-	public Boolean isCurrenTimeWithinTimeSlots() {
-		LocalDateTime currentTime = LocalDateTime.now();
-		for(TimeSlot timeSlot : timeSlots) {
-			for (DayOfWeek dayOfWeek: timeSlot.getDaysOfWeek()) {
-				if (dayOfWeek.equals(currentTime.getDayOfWeek()) && isTimeWithinTimeSlot(currentTime, timeSlot)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	private Boolean isTimeWithinTimeSlot(LocalDateTime currentTime, TimeSlot timeSlot) {
-		Boolean isAfterStartTime = false;
-		if (currentTime.getHour() == timeSlot.getStartTime().getHour()) {
-			if (currentTime.getMinute() >= timeSlot.getStartTime().getMinute()) {
-				isAfterStartTime = true;
-			}
-		} else if (currentTime.getHour() > timeSlot.getStartTime().getHour()) {
-			isAfterStartTime = true;
-		}
-		
-		Boolean isBeforeEndTime = false;
-		if (currentTime.getHour() == timeSlot.getEndTime().getHour()) {
-			if (currentTime.getMinute() < timeSlot.getEndTime().getMinute()) {
-				isBeforeEndTime = true;
-			}
-		} else if (currentTime.getHour() < timeSlot.getEndTime().getHour()) {
-			isBeforeEndTime = true;
-		}
-		
-		return isAfterStartTime && isBeforeEndTime;
-	}
-    
 }
