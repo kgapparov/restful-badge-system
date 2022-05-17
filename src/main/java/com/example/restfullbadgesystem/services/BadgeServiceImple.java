@@ -28,7 +28,7 @@ public class BadgeServiceImple implements BadgeService {
 
     //for getting all the Badges by memberId
     public Collection<Badge> getAllBadgesByMember(Member member) {
-        return badgeDAO.findByMember(member);
+        return badgeDAO.findAllByMember(member);
     }
 
     //for getting single badge
@@ -40,7 +40,6 @@ public class BadgeServiceImple implements BadgeService {
         return badgeFound;
     }
 
-    // updating expired badge
     public Badge updateBadge(Badge badge) {
 
         return badgeDAO.save(badge);
