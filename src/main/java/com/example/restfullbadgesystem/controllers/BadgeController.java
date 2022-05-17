@@ -35,20 +35,20 @@ public class BadgeController {
     // update the Expired Badge
     @PatchMapping("/{id}")
     @RolesAllowed("admin")
-    public Badge updateBadge(@PathVariable Long id) {
-        return badgeServiceImple.updateBadge(id);
+    public Badge patchBadge(@PathVariable Long id) {
+        return badgeServiceImple.patchBadge(id);
     }
 
     @DeleteMapping("/{id}")
-    @RolesAllowed("admin")
     public void deleteBadge(@PathVariable Long id) {
         badgeServiceImple.deleteBadge(id);
     }
 
+    // Update lost Badge
     @PostMapping("/replace/{id}")
     @RolesAllowed("admin")
     public Badge replaceBadge(@PathVariable Long id) {
-        return badgeServiceImple.replaceBadge(id);
+        return badgeServiceImple.updateLostBadge(id);
     }
 
 }
