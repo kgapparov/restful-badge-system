@@ -1,6 +1,7 @@
 package com.example.restfullbadgesystem.services;
 
 import com.example.restfullbadgesystem.domain.Member;
+import com.example.restfullbadgesystem.domain.Membership;
 import com.example.restfullbadgesystem.repositories.MemberDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ public class MemberServiceImpl implements MemberService{
     private MemberDAO memberDAO;
 
     public Member createMember(Member member) {
+        System.out.println("Inside Create Member");
+        System.out.println(member.toString());
+        Member result = memberDAO.save(member);
+        System.out.println(result);
         return memberDAO.save(member);
     }
 

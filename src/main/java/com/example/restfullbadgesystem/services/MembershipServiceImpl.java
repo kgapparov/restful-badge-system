@@ -22,7 +22,7 @@ public class MembershipServiceImpl implements MembershipService{
 
     @Override
     public <T extends Membership> T getMembership(int id) {
-        return (T) membershipDAO.getById(id);
+        return (T) membershipDAO.findById(id).get();
     }
 
     @Override
