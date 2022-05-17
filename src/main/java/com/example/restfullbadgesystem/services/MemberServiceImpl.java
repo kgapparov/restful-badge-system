@@ -1,13 +1,13 @@
 package com.example.restfullbadgesystem.services;
 
-import com.example.restfullbadgesystem.domain.Badge;
-import com.example.restfullbadgesystem.domain.Member;
-import com.example.restfullbadgesystem.domain.Membership;
+import com.example.restfullbadgesystem.domain.*;
 import com.example.restfullbadgesystem.repositories.MemberDAO;
+import com.example.restfullbadgesystem.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 
 @Service
@@ -19,6 +19,15 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private BadgeService badgeService;
 
+    @Autowired
+    private PlanService planService;
+
+    @Autowired
+    private MembershipService membershipService;
+
+     @Autowired
+     private TransactionService transactionService;
+
     public Member createMember(Member member) {
         System.out.println("Inside Create Member");
         System.out.println(member.toString());
@@ -28,8 +37,8 @@ public class MemberServiceImpl implements MemberService{
     }
 
     public Member getMember(int id) {
-        System.out.println("Member Service Impl -> getMember -> " + id);
-        return memberDAO.findById(id).get();
+        Optional<Member> memberOptional = memberDAO.findById(id);
+        return memberOptional.orElse(null);
     }
 
     public Member updateMember(Member member) {
@@ -40,4 +49,21 @@ public class MemberServiceImpl implements MemberService{
     public Collection<Badge> getBadgesForMember(int id) {
         return badgeService.getAllBadgesByMember(getMember(id));
     }
+
+    @Override
+    public Collection<Plan> getPlansForMember(int id) {
+        return getMember(id).getMemberships()
+                .stream().map(Membership::getPlan).distinct().toList();
+    }
+
+    @Override
+    public Collection<Membership> getMembershipsForMember(int id) {
+        return membershipService.getAllMembershipByMember(getMember(id));
+    }
+
+    @Override
+    public Collection<Transaction> getTransactionsForMember(int id) {
+        return transactionService.findAllByMember(getMember(id));
+    }
+
 }

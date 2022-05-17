@@ -22,7 +22,7 @@ public class BadgeController {
 
     @GetMapping("/{id}")
     @RolesAllowed({"admin", "user"})
-    public Badge getBadge(Long id) {
+    public Badge getBadge(@PathVariable Long id) {
         return badgeServiceImple.getBadge(id);
     }
 
@@ -31,14 +31,14 @@ public class BadgeController {
     public Badge createBadge(@RequestBody Badge badge) {
         return badgeServiceImple.createBadge(badge);
     }
-
-    // update the Expired Badge
+    
     @PutMapping("/")
     @RolesAllowed("admin")
-    public Badge patchBadge(@RequestBody Badge badge) {
+    public Badge updateBadge(@RequestBody Badge badge) {
         return badgeServiceImple.updateBadge(badge);
     }
 
+    // Delete badge
     @DeleteMapping("/{id}")
     public void deleteBadge(@PathVariable Long id) {
         badgeServiceImple.deleteBadge(id);
@@ -50,5 +50,4 @@ public class BadgeController {
     public Badge replaceBadge(@PathVariable Long id) {
         return badgeServiceImple.updateLostBadge(id);
     }
-
 }
