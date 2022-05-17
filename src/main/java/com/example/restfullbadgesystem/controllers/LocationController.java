@@ -3,6 +3,8 @@ package com.example.restfullbadgesystem.controllers;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,16 +36,19 @@ public class LocationController {
 		return service.getLocation(id);
 	}
 	
+	@RolesAllowed(value = "admin")
 	@PostMapping("/")
 	public Location createLocation(@RequestBody Location location) {
 		return service.createLocation(location);
 	}
 	
+	@RolesAllowed(value = "admin")
 	@DeleteMapping("/{id}")
 	public void removeLocation(@PathVariable int locationId) {
 		service.removeLocation(locationId);
 	}
 	
+	@RolesAllowed(value = "admin")
 	@PutMapping("/{id}")
 	public void updateLocation(Location newLocation) {
 		service.updateLocation(newLocation);
