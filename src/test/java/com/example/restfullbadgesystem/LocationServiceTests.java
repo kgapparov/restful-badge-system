@@ -31,15 +31,7 @@ import com.example.restfullbadgesystem.service.LocationService;
 import org.junit.Assert;
 
 @RunWith(SpringRunner.class)
-public class LocationServiceTests {
-//	@TestConfiguration
-//	static class LocationServiceImplTestContextConfiguration {
-//		@Bean
-//		public LocationService locationService() {
-//			return new LocationServiceImpl();
-//		}
-//	}
-	
+public class LocationServiceTests {	
 	@Autowired
 	private LocationService service;
 	
@@ -56,6 +48,18 @@ public class LocationServiceTests {
 		
 		Optional<Location> optionalLocation = Optional.of(location);
 		Mockito.when(repository.findById(id)).thenReturn(optionalLocation);
+		Mockito.when(service.createLocation(location)).thenReturn(location);
+	}
+	
+	@Test
+	public void testLocationCreation() {
+		int id = 12345;
+		Collection<DayOfWeek> daysOfWeek = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
+		Collection<TimeSlot> timeslots = Arrays.asList(new TimeSlot(LocalTime.of(9, 0),LocalTime.of(17, 0),daysOfWeek));
+		Collection<LocationType> types = Arrays.asList(LocationType.DINING_HALL);
+		Location location = new Location("Dabby Hall", "Hall", 200, "MIU address", types, timeslots);
+		Location createdLocation = service.createLocation(location);
+		Assert.assertEquals(location, createdLocation);
 	}
 	
 	@Test

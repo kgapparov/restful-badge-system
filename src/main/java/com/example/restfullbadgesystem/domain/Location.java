@@ -22,6 +22,7 @@ public class Location {
     private int capacity;
     private String address;
 
+    @Enumerated(EnumType.STRING)
     @ElementCollection
     private Collection<LocationType> types;
 
