@@ -4,5 +4,5 @@ import com.example.restfullbadgesystem.dto.CheckInDTO;
 
 public interface CheckInService {
 
-    public boolean CheckIn(CheckInDTO checkInDTO);
+    public String CheckIn(CheckInDTO checkInDTO);
 }
