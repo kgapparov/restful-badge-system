@@ -2,6 +2,7 @@ package com.example.restfullbadgesystem.services;
 
 import com.example.restfullbadgesystem.domain.*;
 import com.example.restfullbadgesystem.repositories.MemberDAO;
+import com.example.restfullbadgesystem.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,8 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private MembershipService membershipService;
 
-    // TODO: uncomment this after Transaction Service class is created
-    // @Autowired
-    // private TransactionService transactionService;
+     @Autowired
+     private TransactionService transactionService;
 
     public Member createMember(Member member) {
         System.out.println("Inside Create Member");
@@ -63,9 +63,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Collection<Transaction> getTransactionsForMember(int id) {
-        // TODO: Invoke Transaction Service method to get the collection once the method is created.
-        // return transactionService.getAllTransactionByMember(getMember(id));
-        return null;
+        return transactionService.findAllByMember(getMember(id));
     }
 
 }
