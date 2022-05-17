@@ -1,0 +1,45 @@
+variables:
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+build-job:
+  image: maven:latest
+  stage: build
+  tags:
+    - home
+  script:
+    - echo "Maven Compile started"
+    - "mvn clean compile"
+      
+test-job:
+  image: maven:latest
+  stage: test
+  tags:
+    - home
+  script:
+    - echo "Maven test started"
+    - "mvn clean test"
+    
+package_job:
+  stage:  package
+  image: maven:latest
+  tags:
+    - home
+  script:
+    - echo "Maven package started"
+    - "mvn clean install"
+  artifacts:
+    paths:
+      - target/*.jar
+
+
