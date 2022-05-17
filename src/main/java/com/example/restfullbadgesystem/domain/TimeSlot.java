@@ -19,6 +19,7 @@ public class TimeSlot {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    @Enumerated(EnumType.STRING)
     @ElementCollection
     private Collection<DayOfWeek> daysOfWeek; // enum DayOfWeek is already available since Java 1.8
     
