@@ -18,11 +18,7 @@ public class CheckInController {
     @PostMapping("checkIn")
     public String checkIn(@RequestBody CheckInDTO checkInDTO){
         String message = "";
-        if(  checkInService.CheckIn(checkInDTO)){
-            message = "CheckIn Successful";
-        }else{
-            message = "Something went wrong";
-        }
+        message=checkInService.CheckIn(checkInDTO);
         return message;
     }
 }
