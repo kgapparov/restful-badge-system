@@ -22,8 +22,6 @@ public class PlanController {
         return planService.createPlan(plan);
     }
 
-    // Testing Merge
-    
     @PutMapping("/{id}")
     public Plan updatePlan(@PathVariable int id, @RequestBody Plan plan) {
         return planService.updatePlan(plan);

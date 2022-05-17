@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,6 +22,7 @@ public class Location {
     private int capacity;
     private String address;
 
+    @Enumerated(EnumType.STRING)
     @ElementCollection
     private Collection<LocationType> types;
 
@@ -37,6 +41,4 @@ public class Location {
 		this.types = types;
 		this.timeSlots = timeSlots;
 	}
-    
-    
 }

@@ -16,8 +16,11 @@ public class LimitedMembership extends Membership{
     @Column(name = "membership_limit") // "limit" is a database keyword
     private int limit;
 
-    public LimitedMembership(LocalDate startDate, LocalDate endDate, Member member, Plan plan, int limit) {
+    private int consumed;
+
+    public LimitedMembership(LocalDate startDate, LocalDate endDate, Member member, Plan plan, int limit, int consumed) {
         super(startDate, endDate, member, plan);
         this.limit = limit;
+        this.consumed = consumed;
     }
 }

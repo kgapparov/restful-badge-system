@@ -33,10 +33,10 @@ public class BadgeController {
     }
 
     // update the Expired Badge
-    @PatchMapping("/{id}")
+    @PutMapping("/")
     @RolesAllowed("admin")
-    public Badge patchBadge(@PathVariable Long id) {
-        return badgeServiceImple.patchBadge(id);
+    public Badge patchBadge(@RequestBody Badge badge) {
+        return badgeServiceImple.updateBadge(badge);
     }
 
     @DeleteMapping("/{id}")
