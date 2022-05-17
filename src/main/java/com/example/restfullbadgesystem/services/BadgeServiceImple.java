@@ -2,13 +2,13 @@ package com.example.restfullbadgesystem.services;
 
 import com.example.restfullbadgesystem.domain.Badge;
 import com.example.restfullbadgesystem.domain.Member;
-import com.example.restfullbadgesystem.domain.Role;
 import com.example.restfullbadgesystem.repositories.BadgeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDate;
+
 import java.util.Collection;
 import java.util.List;
+
 
 @Service
 public class BadgeServiceImple implements BadgeService {
@@ -26,6 +26,11 @@ public class BadgeServiceImple implements BadgeService {
         return badgeDAO.findAll();
     }
 
+    //for getting all the Badges by memberId
+    public Collection<Badge> getAllBadgesByMember(Member member) {
+        return badgeDAO.findByMember(member);
+    }
+
     //for getting single badge
     public Badge getBadge(Long id) {
         Badge badgeFound = null;
@@ -36,26 +41,9 @@ public class BadgeServiceImple implements BadgeService {
     }
 
     // updating expired badge
-    public Badge patchBadge(Long id) {
+    public Badge updateBadge(Badge badge) {
 
-        Badge foundBadge = badgeDAO.findById(id).get();
-
-        Collection<Role> role = foundBadge.getMember().getRoles();
-
-        LocalDate foundBadgeExpriyDate = foundBadge.getExpireDate();
-
-        if (role.contains("STAFF")) {
-            foundBadgeExpriyDate.plusMonths(12);
-        } else if (role.contains("FACULTY")) {
-            foundBadgeExpriyDate.plusMonths(6);
-        } else { foundBadgeExpriyDate.plusMonths(1);
-        }
-
-        foundBadge.setExpireDate(foundBadgeExpriyDate);
-
-        badgeDAO.save(foundBadge);
-
-        return foundBadge;
+        return badgeDAO.save(badge);
 
     }
 
