@@ -9,5 +9,5 @@ import java.util.Collection;
 
 @Repository
 public interface BadgeDAO extends JpaRepository<Badge, Long> {
-    Collection<Badge> findByMember(Member member);
+    Collection<Badge> findAllByMember(Member member);
 }
