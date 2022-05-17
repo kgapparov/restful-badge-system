@@ -11,4 +11,5 @@ public interface MemberService {
     public Member createMember(Member member);
     public Member getMember(int id);
     public Member updateMember(Member member);
+    public Collection<Badge> getBadgesForMember(int id);
 }

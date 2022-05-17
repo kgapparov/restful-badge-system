@@ -1,9 +1,14 @@
 package com.example.restfullbadgesystem.services;
 
+
 import com.example.restfullbadgesystem.domain.*;
 import com.example.restfullbadgesystem.dto.CheckInDTO;
 import com.example.restfullbadgesystem.service.LocationService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.restfullbadgesystem.domain.LimitedMembership;
+import com.example.restfullbadgesystem.domain.Location;
+import com.example.restfullbadgesystem.domain.LocationType;
+import com.example.restfullbadgesystem.domain.Plan;
+import com.example.restfullbadgesystem.dto.CheckInDTO;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -14,8 +19,7 @@ import java.util.List;
 @Service
 public class CheckInServiceImpl implements CheckInService
 {
-    //@Autowired
-    //BadgeService badgeService;
+
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -115,5 +119,6 @@ public class CheckInServiceImpl implements CheckInService
         }
 
         return checkinMessage;
+
     }
 }
