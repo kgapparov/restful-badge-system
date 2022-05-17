@@ -63,6 +63,5 @@ public class LocationServiceTests {
 		int id = 12345;
 		Location found = service.getLocation(id);
 		Assert.assertEquals(id, found.getId());
-		
 	}
 }
