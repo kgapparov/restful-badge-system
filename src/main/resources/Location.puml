@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+
+actor "Member" as member
+
+actor "Admin" as admin
+
+rectangle LocationService {
+
+usecase "getAllLocations" as uc3
+usecase "createLocation" as uc4
+usecase "getLocation" as uc5
+usecase "updateLocation" as uc6
+usecase "deleteLocation" as uc7
+
+
+member -->uc3
+member -->uc5
+
+admin --> uc3
+admin --> uc4
+admin --> uc5
+admin --> uc6
+admin --> uc7
+
+}
+
+@enduml

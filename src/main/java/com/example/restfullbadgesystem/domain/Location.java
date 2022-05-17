@@ -4,6 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,11 +23,22 @@ public class Location {
     private String address;
 
     @Enumerated(EnumType.STRING)
-    private LocationType type;
+    @ElementCollection
+    private Collection<LocationType> types;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Collection<TimeSlot> timeSlots = new ArrayList<>();
 
     @Transient
-    private int occupied;
+    private int occupied = 0;
+
+	public Location(String name, String description, int capacity, String address, Collection<LocationType> types,
+			Collection<TimeSlot> timeSlots) {
+		this.name = name;
+		this.description = description;
+		this.capacity = capacity;
+		this.address = address;
+		this.types = types;
+		this.timeSlots = timeSlots;
+	}
 }

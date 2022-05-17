@@ -1,0 +1,20 @@
+@startuml
+left to right direction
+actor "User (Student/ Faculty/ Staff)" as miuuser
+
+rectangle Location {
+    usecase "Check-in to Dinning Hall" as loc1
+    usecase "Check-in to Meditation Hall" as loc2
+    usecase "Check-in to Flying Hall" as loc3
+    usecase "Check-in to Gym" as loc4
+    usecase "Check-in to Dormitory" as loc5
+    usecase "Check-in to Classroom" as loc6
+}
+miuuser --> loc1
+miuuser --> loc2
+miuuser --> loc3
+miuuser --> loc4
+miuuser --> loc5
+miuuser --> loc6
+
+@enduml

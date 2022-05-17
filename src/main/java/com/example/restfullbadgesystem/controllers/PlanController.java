@@ -1,0 +1,29 @@
+package com.example.restfullbadgesystem.controllers;
+
+import com.example.restfullbadgesystem.domain.Plan;
+import com.example.restfullbadgesystem.services.PlanService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/plans")
+public class PlanController {
+    @Autowired
+    private PlanService planService;
+
+    @GetMapping("/{id}")
+    public Plan getPlanById(@PathVariable int id) {
+        System.out.println("Plan Controller -> getPlanById -> " + id);
+        return planService.getPlan(id);
+    }
+
+    @PostMapping
+    public Plan createPlan(@RequestBody Plan plan) {
+        return planService.createPlan(plan);
+    }
+
+    @PutMapping("/{id}")
+    public Plan updatePlan(@PathVariable int id, @RequestBody Plan plan) {
+        return planService.updatePlan(plan);
+    }
+}
