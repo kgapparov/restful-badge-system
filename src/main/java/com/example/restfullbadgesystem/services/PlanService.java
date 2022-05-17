@@ -1,9 +1,6 @@
 package com.example.restfullbadgesystem.services;
 
-import com.example.restfullbadgesystem.domain.LocationType;
-import com.example.restfullbadgesystem.domain.Membership;
-import com.example.restfullbadgesystem.domain.Plan;
-import com.example.restfullbadgesystem.domain.Role;
+import com.example.restfullbadgesystem.domain.*;
 
 import java.util.Collection;
 
@@ -11,4 +8,6 @@ public interface PlanService {
     public Plan createPlan(Plan plan);
     public Plan getPlan(int id);
     public Plan updatePlan(Plan plan);
+//    public Collection<Plan> getAllPlansByMember(Member member);
+    public Collection<Location> getAllLocationsForPlan(int id);
 }
