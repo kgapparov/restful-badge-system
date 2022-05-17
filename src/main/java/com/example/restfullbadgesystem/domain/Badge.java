@@ -16,8 +16,6 @@ public class Badge {
     private LocalDate expireDate;
 
     private Boolean isActive;
-    @ManyToOne
-    private Member member;
 
     public Badge() {
     }
@@ -34,6 +32,7 @@ public class Badge {
         }
     }
 
-
+    @ManyToOne
+    private Member member;
 
 }

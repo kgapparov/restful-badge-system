@@ -27,11 +27,22 @@ import com.example.restfullbadgesystem.domain.LocationType;
 import com.example.restfullbadgesystem.domain.TimeSlot;
 import com.example.restfullbadgesystem.repositories.LocationDAO;
 import com.example.restfullbadgesystem.service.LocationService;
+import com.example.restfullbadgesystem.service.LocationServiceImpl;
+import com.example.restfullbadgesystem.services.PlanService;
+import com.example.restfullbadgesystem.services.PlanServiceImpl;
 
 import org.junit.Assert;
 
 @RunWith(SpringRunner.class)
 public class LocationServiceTests {	
+	@TestConfiguration
+    static class LocationServiceImplTestContextConfiguration{
+        @Bean
+        public LocationService locationService() {
+            return new LocationServiceImpl();
+        }
+    }
+	
 	@Autowired
 	private LocationService service;
 	
@@ -64,7 +75,13 @@ public class LocationServiceTests {
 	@Test
 	public void testGetLocation() {
 		int id = 12345;
-		Location found = service.getLocation(id);
-		Assert.assertEquals(id, found.getId());
+		Location foundLocation = service.getLocation(id);
+		
+		Collection<DayOfWeek> daysOfWeek = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
+		Collection<TimeSlot> timeslots = Arrays.asList(new TimeSlot(LocalTime.of(9, 0),LocalTime.of(17, 0),daysOfWeek));
+		Collection<LocationType> types = Arrays.asList(LocationType.DINING_HALL);
+		Location location = new Location("Dabby Hall", "Hall", 200, "MIU address", types, timeslots);
+		
+		Assert.assertEquals(location, foundLocation);
 	}
 }
