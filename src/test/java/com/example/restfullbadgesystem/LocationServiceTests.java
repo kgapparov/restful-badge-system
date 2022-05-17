@@ -53,7 +53,6 @@ public class LocationServiceTests {
 	
 	@Test
 	public void testLocationCreation() {
-		int id = 12345;
 		Collection<DayOfWeek> daysOfWeek = Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
 		Collection<TimeSlot> timeslots = Arrays.asList(new TimeSlot(LocalTime.of(9, 0),LocalTime.of(17, 0),daysOfWeek));
 		Collection<LocationType> types = Arrays.asList(LocationType.DINING_HALL);
