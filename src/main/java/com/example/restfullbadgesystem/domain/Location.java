@@ -5,13 +5,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
