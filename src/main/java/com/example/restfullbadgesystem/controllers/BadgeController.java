@@ -4,7 +4,6 @@ import com.example.restfullbadgesystem.domain.Badge;
 import com.example.restfullbadgesystem.services.BadgeServiceImple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class BadgeController {
 
     @GetMapping("/{id}")
     @RolesAllowed({"admin", "user"})
-    public Badge getBadge(@PathVariable Long id) {
+    public Badge getBadge(@PathVariable int id) {
         return badgeServiceImple.getBadge(id);
     }
 
@@ -40,14 +39,14 @@ public class BadgeController {
 
     // Delete badge
     @DeleteMapping("/{id}")
-    public void deleteBadge(@PathVariable Long id) {
+    public void deleteBadge(@PathVariable int id) {
         badgeServiceImple.deleteBadge(id);
     }
 
     // Update lost Badge
     @PostMapping("/replace/{id}")
     @RolesAllowed("admin")
-    public Badge replaceBadge(@PathVariable Long id) {
+    public Badge replaceBadge(@PathVariable int id) {
         return badgeServiceImple.updateLostBadge(id);
     }
 }

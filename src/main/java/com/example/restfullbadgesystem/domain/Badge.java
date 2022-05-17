@@ -33,7 +33,4 @@ public class Badge {
         }   else { this.expireDate = issueDate.plusMonths(8);
         }
     }
-
-
-
 }
