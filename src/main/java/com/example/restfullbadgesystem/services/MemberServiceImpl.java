@@ -29,16 +29,11 @@ public class MemberServiceImpl implements MemberService{
      private TransactionService transactionService;
 
     public Member createMember(Member member) {
-        System.out.println("Inside Create Member");
-        System.out.println(member.toString());
-        Member result = memberDAO.save(member);
-        System.out.println(result);
         return memberDAO.save(member);
     }
 
     public Member getMember(int id) {
-        Optional<Member> memberOptional = memberDAO.findById(id);
-        return memberOptional.orElse(null);
+        return memberDAO.findById(id).orElse(null);
     }
 
     public Member updateMember(Member member) {

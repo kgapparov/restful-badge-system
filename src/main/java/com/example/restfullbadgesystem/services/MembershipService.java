@@ -2,7 +2,6 @@ package com.example.restfullbadgesystem.services;
 
 import com.example.restfullbadgesystem.domain.*;
 
-import java.time.LocalDate;
 import java.util.Collection;
 
 public interface MembershipService {

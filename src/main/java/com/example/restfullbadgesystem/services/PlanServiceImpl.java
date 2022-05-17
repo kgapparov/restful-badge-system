@@ -25,25 +25,17 @@ public class PlanServiceImpl implements PlanService {
     }
 
     public Plan getPlan(int id) {
-        System.out.println("Plan Service Impl -> getPlan -> " + id);
-        return planDAO.findById(id).get();
+        return planDAO.findById(id).orElse(null);
     }
 
     public Plan updatePlan(Plan plan) {
         return planDAO.save(plan);
     }
 
-//    @Override
-//    public Collection<Plan> getAllPlansByMember(Member member) {
-//        return planDAO.findAllByMember(member);
-//    }
-
     @Override
     public Collection<Location> getAllLocationsForPlan(int id) {
-        Collection<Location> allLocationsForPlan = locationService.getAllLocations().stream()
+        return locationService.getAllLocations().stream()
                 .filter(location -> location.getTypes().stream().anyMatch(planDAO.getById(id).getAllowedLocationTypes()::contains))
                 .toList();
-
-        return allLocationsForPlan;
     }
 }
