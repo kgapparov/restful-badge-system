@@ -1,5 +1,6 @@
 package com.example.restfullbadgesystem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,10 +24,12 @@ public class Member {
     @ElementCollection
     private Collection<Role> roles;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties("member")
     private Collection<Membership> memberships;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("member")
     private Collection<Badge> badges;
 
     public Member(String firstName, String lastName, String emailAddress, Collection<Role> roles,

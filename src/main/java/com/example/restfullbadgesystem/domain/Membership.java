@@ -1,5 +1,6 @@
 package com.example.restfullbadgesystem.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,9 +22,11 @@ public class Membership {
     private LocalDate endDate;
 
     @ManyToOne
+    @JsonIgnoreProperties("memberships")
     private Member member;
 
     @ManyToOne
+    @JsonIgnoreProperties("memberships")
     private Plan plan;
 
     public Membership(LocalDate startDate, LocalDate endDate, Member member, Plan plan) {
