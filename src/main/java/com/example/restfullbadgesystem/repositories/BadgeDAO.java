@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface BadgeDAO extends JpaRepository<Badge, Long> {
+public interface BadgeDAO extends JpaRepository<Badge, Integer> {
     Collection<Badge> findAllByMember(Member member);
 }

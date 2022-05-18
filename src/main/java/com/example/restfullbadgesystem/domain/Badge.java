@@ -16,7 +16,10 @@ public class Badge {
     private LocalDate expireDate;
 
     private Boolean isActive;
-
+  
+    @ManyToOne
+    private Member member;
+  
     public Badge() {
     }
 
@@ -31,8 +34,5 @@ public class Badge {
         }   else { this.expireDate = issueDate.plusMonths(8);
         }
     }
-
-    @ManyToOne
-    private Member member;
 
 }
