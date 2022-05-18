@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Data
 @NoArgsConstructor
+@Transactional
 public class TransactionQueuePublisherServiceImpl implements TransactionQueuePublisherService {
 
     private RabbitTemplate template;
