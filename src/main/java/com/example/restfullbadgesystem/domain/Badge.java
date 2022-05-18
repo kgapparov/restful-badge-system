@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Badge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private LocalDate issueDate;
 
