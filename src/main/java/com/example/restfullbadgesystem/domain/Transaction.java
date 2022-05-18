@@ -1,7 +1,6 @@
 package com.example.restfullbadgesystem.domain;
 
 import lombok.Data;
-import org.springframework.data.jpa.repository.Temporal;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

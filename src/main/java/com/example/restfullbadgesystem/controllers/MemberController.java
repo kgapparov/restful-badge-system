@@ -15,7 +15,6 @@ public class MemberController {
 
     @GetMapping("/{id}")
     public Member getMemberById(@PathVariable int id) {
-        System.out.println("MemberController -> getMemeberById -> " + id);
         return memberService.getMember(id);
     }
 

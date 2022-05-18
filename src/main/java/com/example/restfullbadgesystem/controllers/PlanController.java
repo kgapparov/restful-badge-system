@@ -16,7 +16,6 @@ public class PlanController {
 
     @GetMapping("/{id}")
     public Plan getPlanById(@PathVariable int id) {
-        System.out.println("Plan Controller -> getPlanById -> " + id);
         return planService.getPlan(id);
     }
 

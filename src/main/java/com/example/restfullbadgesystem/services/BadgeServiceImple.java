@@ -33,11 +33,7 @@ public class BadgeServiceImple implements BadgeService {
 
     //for getting single badge
     public Badge getBadge(Long id) {
-        Badge badgeFound = null;
-        if (badgeDAO.findById(id).isPresent()) {
-            badgeFound = badgeDAO.findById(id).get();
-        }
-        return badgeFound;
+        return badgeDAO.findById(id).orElse(null);
     }
 
     public Badge updateBadge(Badge badge) {
@@ -54,9 +50,9 @@ public class BadgeServiceImple implements BadgeService {
 
     // Update lost Badge
     public Badge updateLostBadge(Long id) {
-
         // get the lostbadge by id, Make it inactive and Save it
-        Badge lostBadge = badgeDAO.findById(id).get();
+        Badge lostBadge = badgeDAO.findById(id).orElse(null);
+        assert lostBadge != null;
         lostBadge.setIsActive(false);
         badgeDAO.save(lostBadge);
 

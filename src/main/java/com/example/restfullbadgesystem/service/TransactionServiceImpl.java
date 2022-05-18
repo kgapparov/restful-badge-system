@@ -42,6 +42,6 @@ public class TransactionServiceImpl implements TransactionService{
 
     @Override
     public Transaction getById(int id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 }

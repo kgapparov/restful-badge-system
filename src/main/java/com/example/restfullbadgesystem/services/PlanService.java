@@ -8,6 +8,5 @@ public interface PlanService {
     public Plan createPlan(Plan plan);
     public Plan getPlan(int id);
     public Plan updatePlan(Plan plan);
-//    public Collection<Plan> getAllPlansByMember(Member member);
     public Collection<Location> getAllLocationsForPlan(int id);
 }
