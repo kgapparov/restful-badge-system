@@ -3,12 +3,10 @@ package com.example.restfullbadgesystem.services;
 
 import com.example.restfullbadgesystem.domain.*;
 import com.example.restfullbadgesystem.dto.CheckInDTO;
-import com.example.restfullbadgesystem.service.LocationService;
 import com.example.restfullbadgesystem.domain.LimitedMembership;
 import com.example.restfullbadgesystem.domain.Location;
 import com.example.restfullbadgesystem.domain.LocationType;
 import com.example.restfullbadgesystem.domain.Plan;
-import com.example.restfullbadgesystem.dto.CheckInDTO;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -16,6 +14,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
+
+enum CheckinStatus {
+    CHECKIN, CHECKOUT, DENIED
+}
 @Service
 public class CheckInServiceImpl implements CheckInService
 {
@@ -121,4 +123,27 @@ public class CheckInServiceImpl implements CheckInService
         return checkinMessage;
 
     }
+
+
+//    @Autowired
+//    private BadgeService badgeService;
+//
+//    @Autowired
+//    private LocationService locationService;
+//
+//    @Autowired PlanService planService;
+//
+//    @Override
+//    public String CheckIn(CheckInDTO checkInDTO) {
+//        Badge badge = badgeService.getBadge(checkInDTO.badgeId);
+//        Location location = locationService.getLocation(checkInDTO.locationId);
+//        //1 isActive
+//        boolean badgeStatus = badge.getIsActive();
+//        //getMembership
+//        Collection<Membership> memberShips = badge.getMember().getMemberships();
+//        for (Membership membership : memberShips) {
+//
+//        }
+//
+//    }
 }

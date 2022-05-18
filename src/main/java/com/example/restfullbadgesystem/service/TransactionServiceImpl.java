@@ -5,13 +5,20 @@ import com.example.restfullbadgesystem.domain.Transaction;
 import com.example.restfullbadgesystem.repositories.TransactionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 @Service
+@Transactional
 public class TransactionServiceImpl implements TransactionService{
-    @Autowired
+
     private TransactionDAO repository;
+
+    @Autowired
+    public void setRepository(TransactionDAO repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Collection<Transaction> findAllByMember(Member member) {

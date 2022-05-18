@@ -9,12 +9,19 @@ import com.example.restfullbadgesystem.domain.Location;
 import com.example.restfullbadgesystem.domain.Member;
 import com.example.restfullbadgesystem.domain.TimeSlot;
 import com.example.restfullbadgesystem.repositories.LocationDAO;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class LocationServiceImpl implements LocationService {
+
+	private LocationDAO repository;
+
 	@Autowired
-	LocationDAO repository;
- 
+	public void setRepository(LocationDAO repository) {
+		this.repository = repository;
+	}
+
 	public Location getLocation(int id) {
 		return repository.findById(id).get();
 	}
