@@ -1,6 +1,7 @@
 package com.example.restfullbadgesystem.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -11,6 +12,7 @@ import java.util.Collection;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class TimeSlot {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
