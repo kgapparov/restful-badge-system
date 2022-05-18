@@ -5,6 +5,7 @@ import com.example.restfullbadgesystem.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.Collection;
 
 @RestController
@@ -20,6 +21,7 @@ public class MemberController {
     }
 
     @PostMapping
+    @RolesAllowed({"user", "admin"})
     public Member createMember(@RequestBody Member member){
         return memberService.createMember(member);
     }
