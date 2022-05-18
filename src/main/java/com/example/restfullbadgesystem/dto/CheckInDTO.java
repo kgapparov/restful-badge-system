@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class CheckInDTO {
     public Integer locationId;
-    public Long badgeId;
+    public Integer badgeId;
 
 
 }
