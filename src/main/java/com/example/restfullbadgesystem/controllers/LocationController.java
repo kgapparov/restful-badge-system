@@ -36,19 +36,19 @@ public class LocationController {
 		return service.getLocation(id);
 	}
 	
-	@RolesAllowed(value = "admin")
+	@RolesAllowed({"user", "admin"})
 	@PostMapping("/")
 	public Location createLocation(@RequestBody Location location) {
 		return service.createLocation(location);
 	}
 	
-	@RolesAllowed(value = "admin")
+	@RolesAllowed({"user", "admin"})
 	@DeleteMapping("/{id}")
 	public void removeLocation(@PathVariable int locationId) {
 		service.removeLocation(locationId);
 	}
 	
-	@RolesAllowed(value = "admin")
+	@RolesAllowed({"user", "admin"})
 	@PutMapping("/{id}")
 	public void updateLocation(Location newLocation) {
 		service.updateLocation(newLocation);
