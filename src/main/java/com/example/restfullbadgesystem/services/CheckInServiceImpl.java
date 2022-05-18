@@ -7,12 +7,13 @@ import com.example.restfullbadgesystem.domain.LimitedMembership;
 import com.example.restfullbadgesystem.domain.Location;
 import com.example.restfullbadgesystem.domain.LocationType;
 import com.example.restfullbadgesystem.domain.Plan;
+import com.example.restfullbadgesystem.service.LocationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
+
 
 
 enum CheckinStatus {
@@ -21,129 +22,82 @@ enum CheckinStatus {
 @Service
 public class CheckInServiceImpl implements CheckInService
 {
+    @Autowired
+    private BadgeService badgeService;
+
+    @Autowired
+    private LocationService locationService;
+
+    @Autowired
+    private PlanService planService;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private MembershipService membershipService;
 
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
+    @Override
     public String CheckIn(CheckInDTO checkInDTO) {
-        boolean accessAllowed = false;
         String checkinMessage = null;
 
-        Query badgequery = entityManager.createQuery("from Badge b where b.id= :badgeId");
-        badgequery.setParameter("badgeId", checkInDTO.badgeId);
-        List<Badge> badgeList = badgequery.getResultList();
-        System.out.println("Badge result>>>>>>>>>>>" + badgeList.get(0).getIsActive() + ">>>>>>>>>>>>>>>>>>" + badgeList.get(0).toString());
+        System.out.println("checkInDTO.badgeId>>>>>>>>>>>>"+checkInDTO.badgeId);
+        Badge badge = badgeService.getBadge(checkInDTO.badgeId);
+        Location location = locationService.getLocation(checkInDTO.locationId);
+        System.out.println("Location id>>>>>>>>>>>"+checkInDTO.locationId);
+        //1 isActive
+        boolean badgeStatus = badge.getIsActive();
+        System.out.println("Badge status>>>>>>>>>>"+badge.getMember().getId());
+        int activeBadgeMemberId= badge.getMember().getId();
+        //boolean allowAccess;
 
-        //for not active badge
-        if (!badgeList.get(0).getIsActive()) {
-            checkinMessage = "Not Active Badge";
+        Membership membership=membershipService.getMembership(activeBadgeMemberId);
+        LimitedMembership limitedMembership= membershipService.getMembership(activeBadgeMemberId);
 
+        //Plan planforactiveMember=planService.getAllLocationsForPlan(pla);
+
+        Collection<Plan> plansForActiveMember = memberService.getPlansForMember(activeBadgeMemberId);
+        Collection<LocationType> allowedLocationsForActiveMember = new ArrayList<>();
+
+        for(Plan plan: plansForActiveMember) {
+            for(LocationType locationType: plan.getAllowedLocationTypes()){
+                allowedLocationsForActiveMember.add(locationType);
+                System.out.println("locationType"+locationType.toString());
+            }
         }
-        //for active badge
-        else if (badgeList.get(0).getIsActive()) {
-            checkinMessage="Active Badge";
-            Query planquery = entityManager.createQuery("from Plan p JOIN p.memberships ms " +
-                    " JOIN ms.member m " +
-                    "JOIN m.badges bd WHERE bd.id = :badgeId "
-            );
+
+        allowedLocationsForActiveMember = allowedLocationsForActiveMember.stream().distinct().toList();
+        Boolean allowAccess = location.getTypes().stream().anyMatch(allowedLocationsForActiveMember::contains);
+
+        // for not active member getBadgesForActiveMember
+        if(!badgeStatus){
+            checkinMessage="Invalid Member Card";
+        }
+        //for active member
+        else {
 
 
-            planquery.setParameter("badgeId", checkInDTO.badgeId);
-            List<Object[]> planlist = planquery.getResultList();
-            Plan plan = (Plan) planlist.get(0)[0];
 
+            System.out.println("");
+            if (location.getCapacity() <= location.getOccupied()) {
+                checkinMessage = "This place reach maximum occupants.";
+            }
+            else{
 
-            Query query = entityManager.createQuery("from Location l where  l.id = :locationId ");
-            query.setParameter("locationId", checkInDTO.locationId);
-            List<Location> locationList = query.getResultList();
-            Location location = locationList.get(0);
-            System.out.println("Location result" + locationList.get(0).toString());
-
-            /*public boolean checkCurrentTimeAvailable(Location loc){
-                // code here
-
-                return 1;
+                //for limited membership
+                if(limitedMembership.getConsumed()>=limitedMembership.getLimit())
+                    // checking 4.
+                    checkinMessage = "You already reach maximum allow access to this place.";
+                else
+                    checkinMessage = "Check in Success";
             }
 
-            */
-
-            Query memberShipquery = entityManager.createQuery("from LimitedMembership lm JOIN lm.member m JOIN m.badges bd  " +
-                    "WHERE bd.id = :badgeId "
-            );
-
-            memberShipquery.setParameter("badgeId", checkInDTO.badgeId);
-            List<Object[]> memberShipList = memberShipquery.getResultList();
-
-            System.out.println(memberShipList.get(0)[0] + "<<<<<<<<<<<.>>>>>>>>>>>>>>");
-
-            boolean limitexceed = true;
-            if (memberShipList != null && memberShipList.size() > 0 && memberShipList.get(0).length > 0) {
-                LimitedMembership limitedMembership = (LimitedMembership) memberShipList.get(0)[0];
-                if (limitedMembership.getLimit() > limitedMembership.getConsumed()) {
-                    limitexceed = false;
-                }
-
-            }
-
-            boolean isAllowrdTypeIncluded = false;
-            if (locationList != null && locationList.size() > 0) {
-                for (LocationType locationType : plan.getAllowedLocationTypes()) {
-                    for (LocationType locationTypeRoom : location.getTypes()) {
-                        System.out.println(locationType + "??????????????????" + locationTypeRoom);
-                        if (locationType.equals(locationTypeRoom)) {
-
-                            isAllowrdTypeIncluded = true;
-                        }
-                    }
-                }
-            }
-            // System.out.println(badgeService.getBadge(checkInDTO.badgeId).getActive() + "??????????????");
-            // System.out.println(isAllowrdTypeIncluded + "isAllowrdIncluded");
-
-            if (badgeList.get(0).getIsActive() &&
-                    //badgeService.getBadge(checkInDTO.badgeId) != null && badgeService.getBadge(checkInDTO.badgeId).getActive() != null &&
-                    //badgeService.getBadge(checkInDTO.badgeId).getActive() &&// check badge status
-                    isAllowrdTypeIncluded &&
-                    location.getCapacity() > location.getOccupied() &&
-                    !limitexceed //&&
-                // checkCurrentTimeAvailable(location)
-            ) {
-                // this plan allow to access this location or
-                // current timeslot between location available timeslot
-                // < max limit for current month total availabe usage or
-
-                accessAllowed = true;
-            }
-
-            //return accessAllowed;
 
         }
 
         return checkinMessage;
+    }//end of isActive badge
 
-    }
-
-
-//    @Autowired
-//    private BadgeService badgeService;
-//
-//    @Autowired
-//    private LocationService locationService;
-//
-//    @Autowired PlanService planService;
-//
-//    @Override
-//    public String CheckIn(CheckInDTO checkInDTO) {
-//        Badge badge = badgeService.getBadge(checkInDTO.badgeId);
-//        Location location = locationService.getLocation(checkInDTO.locationId);
-//        //1 isActive
-//        boolean badgeStatus = badge.getIsActive();
-//        //getMembership
-//        Collection<Membership> memberShips = badge.getMember().getMemberships();
-//        for (Membership membership : memberShips) {
-//
-//        }
-//
-//    }
 }
