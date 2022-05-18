@@ -9,6 +9,4 @@ public class CheckInDTO {
     public Long badgeId;
 
 
-
-
 }

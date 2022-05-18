@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlanDAO extends JpaRepository<Plan, Integer> {
+//    Collection<Plan> findAllByMember(Member member);
 }

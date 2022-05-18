@@ -5,6 +5,8 @@ import com.example.restfullbadgesystem.repositories.MembershipDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class MembershipServiceImpl implements MembershipService{
     @Autowired
@@ -22,11 +24,16 @@ public class MembershipServiceImpl implements MembershipService{
 
     @Override
     public <T extends Membership> T getMembership(int id) {
-        return (T) membershipDAO.findById(id).get();
+        return (T) membershipDAO.findById(id).orElse(null);
     }
 
     @Override
     public <T extends Membership> T updateMembership(T membership) {
         return (T) membershipDAO.save(membership);
+    }
+
+    @Override
+    public <T extends Membership> Collection<T> getAllMembershipByMember(Member member) {
+        return membershipDAO.findAllByMember(member);
     }
 }

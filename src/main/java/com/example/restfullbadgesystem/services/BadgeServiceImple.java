@@ -32,10 +32,13 @@ public class BadgeServiceImple implements BadgeService {
     }
 
     //for getting single badge
+
     public Badge getBadge(int id) {
+
         return badgeDAO.findById(id).orElse(null);
     }
-
+   
+    
     public Badge updateBadge(Badge badge) {
         return badgeDAO.save(badge);
     }
@@ -46,10 +49,12 @@ public class BadgeServiceImple implements BadgeService {
     }
 
     // Update lost Badge
+
     public Badge updateLostBadge(int id) {
 
         // get the lostbadge by id, Make it inactive and Save it
-        Badge lostBadge = badgeDAO.findById(id).get();
+        Badge lostBadge = badgeDAO.findById(id).orElse(null);
+        assert lostBadge != null;
         lostBadge.setIsActive(false);
         badgeDAO.save(lostBadge);
 
