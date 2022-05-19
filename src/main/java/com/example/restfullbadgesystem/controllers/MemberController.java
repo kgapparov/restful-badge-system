@@ -14,6 +14,7 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @RolesAllowed({"admin", "user"})
     @GetMapping("/{id}")
     public Member getMemberById(@PathVariable int id) {
         return memberService.getMember(id);
@@ -26,6 +27,7 @@ public class MemberController {
     }
 
     @PutMapping("/{id}")
+    @RolesAllowed({"admin", "user"})
     public Member updateMember(@PathVariable int id, @RequestBody Member member) {
         return memberService.updateMember(member);
     }
