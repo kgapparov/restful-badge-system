@@ -10,5 +10,4 @@ public class RestfullBadgeSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(RestfullBadgeSystemApplication.class, args);
     }
-
 }
