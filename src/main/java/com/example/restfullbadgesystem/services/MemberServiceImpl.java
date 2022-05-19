@@ -4,6 +4,7 @@ import com.example.restfullbadgesystem.domain.*;
 import com.example.restfullbadgesystem.repositories.MemberDAO;
 import com.example.restfullbadgesystem.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -25,7 +26,8 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     private MembershipService membershipService;
 
-     @Autowired
+    @Qualifier("transaction")
+    @Autowired
      private TransactionService transactionService;
 
     public Member createMember(Member member) {

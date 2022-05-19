@@ -103,7 +103,7 @@ public class CheckInServiceImpl implements CheckInService {
                             return "This place reach maximum occupants.";
                         //for limited membership
 
-                        if (limitedMembership.getLimit() != null && limitedMembership.getConsumed() >= limitedMembership.getLimit())
+                        if (limitedMembership.getLimit() != 0 && limitedMembership.getConsumed() >= limitedMembership.getLimit())
                             return "You already reach maximum allow access to this place.";
 
                         return "Check In Success";
