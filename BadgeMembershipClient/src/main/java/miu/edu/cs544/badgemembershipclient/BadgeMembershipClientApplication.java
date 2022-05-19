@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 @SpringBootApplication
