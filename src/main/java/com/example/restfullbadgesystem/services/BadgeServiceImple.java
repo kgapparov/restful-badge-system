@@ -32,35 +32,33 @@ public class BadgeServiceImple implements BadgeService {
     }
 
     //for getting single badge
-    public Badge getBadge(Long id) {
-        Badge badgeFound = null;
-        if (badgeDAO.findById(id).isPresent()) {
-            badgeFound = badgeDAO.findById(id).get();
-        }
-        return badgeFound;
+
+    public Badge getBadge(int id) {
+
+        return badgeDAO.findById(id).orElse(null);
     }
-
+   
+    
     public Badge updateBadge(Badge badge) {
-
         return badgeDAO.save(badge);
-
     }
 
     // delete Badge
-    public void deleteBadge(Long id) {
-
+    public void deleteBadge(int id) {
         badgeDAO.deleteById(id);
     }
 
     // Update lost Badge
-    public Badge updateLostBadge(Long id) {
+
+    public Badge updateLostBadge(int id) {
 
         // get the lostbadge by id, Make it inactive and Save it
-        Badge lostBadge = badgeDAO.findById(id).get();
+        Badge lostBadge = badgeDAO.findById(id).orElse(null);
+        assert lostBadge != null;
         lostBadge.setIsActive(false);
         badgeDAO.save(lostBadge);
 
-        // getting member from lost badge, set a batch to it
+        // getting member from lost badge, set a new batch to it
         // shift the lost batch ExpireDate to new batch ExpireDate
         Member lostBadgeMemeber = lostBadge.getMember();
         Badge newBadge = new Badge();

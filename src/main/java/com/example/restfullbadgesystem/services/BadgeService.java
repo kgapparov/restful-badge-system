@@ -18,15 +18,15 @@ public interface BadgeService {
     public Collection<Badge> getAllBadgesByMember(Member member);
 
     //for getting single badge
-    public Badge getBadge(Long id);
+    public Badge getBadge(int id);
 
     // updating expired badge
     public Badge updateBadge(Badge badge);
 
     // delete Badge
-    public void deleteBadge(Long id);
+    public void deleteBadge(int id);
 
     // Update lost Badge
-    public Badge updateLostBadge(Long id);
+    public Badge updateLostBadge(int id);
 
 }

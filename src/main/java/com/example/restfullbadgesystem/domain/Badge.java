@@ -9,14 +9,17 @@ import java.time.LocalDate;
 public class Badge {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private LocalDate issueDate;
 
     private LocalDate expireDate;
 
     private Boolean isActive;
-
+  
+    @ManyToOne
+    private Member member;
+  
     public Badge() {
     }
 
@@ -31,8 +34,5 @@ public class Badge {
         }   else { this.expireDate = issueDate.plusMonths(8);
         }
     }
-
-    @ManyToOne
-    private Member member;
 
 }

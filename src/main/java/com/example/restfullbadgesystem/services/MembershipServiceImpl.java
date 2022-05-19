@@ -24,7 +24,7 @@ public class MembershipServiceImpl implements MembershipService{
 
     @Override
     public <T extends Membership> T getMembership(int id) {
-        return (T) membershipDAO.findById(id).get();
+        return (T) membershipDAO.findById(id).orElse(null);
     }
 
     @Override
