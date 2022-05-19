@@ -5,7 +5,6 @@ import com.example.restfullbadgesystem.dto.CheckInDTO;
 import com.example.restfullbadgesystem.service.LocationService;
 import com.example.restfullbadgesystem.service.TransactionQueuePublisherService;
 import com.example.restfullbadgesystem.services.BadgeService;
-import com.example.restfullbadgesystem.services.MemberService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
