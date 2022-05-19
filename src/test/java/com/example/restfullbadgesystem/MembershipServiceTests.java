@@ -1,7 +1,6 @@
 package com.example.restfullbadgesystem;
 
 import com.example.restfullbadgesystem.domain.LimitedMembership;
-import com.example.restfullbadgesystem.domain.Membership;
 import com.example.restfullbadgesystem.repositories.MembershipDAO;
 import com.example.restfullbadgesystem.services.MembershipService;
 import com.example.restfullbadgesystem.services.MembershipServiceImpl;

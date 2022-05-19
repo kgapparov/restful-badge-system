@@ -19,6 +19,22 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
+#  security:
+#    oauth2:
+#      client:
+#        provider: http://localhost:8080/realms/restSecurity
+#        registration:
+#          restful-badge-system:
+#            clientId: restful-badge-system
+#            scope:
+#              - openid
+#              - profile
+#              - roles
+#            authorizationGrantType: authorization_code
+#            redirectUri: http://localhost:8080/login/oauth2/code/restful-badge-system
+
+
+
 keycloak:
   realm: restSecurity
   auth-server-url: http://localhost:8080/
