@@ -26,29 +26,31 @@ public class LocationController {
 	@Autowired
 	private LocationServiceImpl service;
 	
+	@RolesAllowed({"user", "admin"})
 	@GetMapping
 	public Collection<Location> getAllLocations() {
 		return service.getAllLocations();
 	}
 	
+	@RolesAllowed({"user", "admin"})
 	@GetMapping("/{id}")
 	public Location getLocation(int id) {
 		return service.getLocation(id);
 	}
 	
-	@RolesAllowed({"user", "admin"})
+	@RolesAllowed({"admin"})
 	@PostMapping("/")
 	public Location createLocation(@RequestBody Location location) {
 		return service.createLocation(location);
 	}
 	
-	@RolesAllowed({"user", "admin"})
+	@RolesAllowed({"admin"})
 	@DeleteMapping("/{id}")
 	public void removeLocation(@PathVariable int locationId) {
 		service.removeLocation(locationId);
 	}
 	
-	@RolesAllowed({"user", "admin"})
+	@RolesAllowed({"admin"})
 	@PutMapping("/{id}")
 	public void updateLocation(Location newLocation) {
 		service.updateLocation(newLocation);
