@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
-@Service
+@Service("transaction")
 @Transactional
 public class TransactionServiceImpl implements TransactionService{
 
